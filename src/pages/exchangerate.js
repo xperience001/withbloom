@@ -51,47 +51,30 @@ const ExchangeRate = () => {
       }
   }
 
-  const handleExchange = () => {
-    const handle = () => {
-        let coinPair = `${fromCurrency}${toCurrency}`
-        console.log(coinPair)
-        const pair = data.filter(({ coin }) => {
-            // coin = coin.toLowerCase();
-            return coin.includes(coinPair);
-          });
-        setRate(pair[0].rate)
-        // setRate(rate)
-        let ans;
-        if (from) {
-          ans = from * rate;
-          console.log('rate', rate)
-          setTo(ans);
-        } else {
-          ans = to / rate;
-          setFrom(ans);
-        }
+  const handle = () => {
+    let coinPair = `${fromCurrency}${toCurrency}`
+    console.log(coinPair)
+    const pair = data.filter(({ coin }) => {
+        // coin = coin.toLowerCase();
+        return coin.includes(coinPair);
+      });
+    const rate = pair[0].rate
+    setRate(rate)
+    // setRate(rate)
+    let ans;
+    if (from) {
+      ans = from * rate;
+      console.log('rate', rate)
+      setTo(ans);
+    } else {
+      ans = to / rate;
+      setFrom(ans);
     }
-    handle()
-    setTimeout(() => {
-        handle()
-    }, 3000);
-  };
+}
 
-  const selectAfter = (
-    <Select defaultValue="USD">
-      <Option value="BNB">BNB</Option>
-      <Option value="BTC">BTC</Option>
-      <Option value="ETH">ETH</Option>
-      <Option value="BUSD">BUSD</Option>
-      <Option value="CUSD">CUSD</Option>
-      <Option value="USDT">USDT</Option>
-      <Option value="DASH">DASH</Option>
-      <Option value="USD">USD</Option>
-      <Option value="NGN">NGN</Option>
-      <Option value="TRON">TRON</Option>
-      <Option value="TRON_USDT">TRON USDT</Option>
-    </Select>
-  );
+  const handleExchange = async () => {
+    handle()
+  };
 
   const currencyOptions = [
     { key: "BNB", text: "BNB", value: "BNB" },
@@ -111,11 +94,12 @@ const ExchangeRate = () => {
     <div className="card-body">
       <div className="card">
         <form>
-          <Row gutter={65}>
+          <Row gutter={10} style={{display: 'flex', justifyContent: 'space-between', color: 'white' }}>
             <Col span={8}>
               <Form.Item>
-                <label style={{ fontSize: "1.5rem" }}> From Amount </label>
+                <label style={{ fontSize: "1.5rem", width: "25rem", color: 'white'   }}> From Amount </label>
                 <Input
+                  style={{ width: "20rem" }}
                   name="from"
                   placeholder="From Amount"
                   value={from}
@@ -125,11 +109,11 @@ const ExchangeRate = () => {
             </Col>
             <Col span={8}>
               <Form.Item>
-                <label style={{ fontSize: "1.5rem" }}> Currency </label>
+                <label style={{ fontSize: "1.5rem", color: 'white'  }}> Currency </label>
                 <Select
                   style={{ width: "10rem" }}
                   size="medium"
-                  placeholder="USD"
+                  placeholder="Currency"
                   onChange={(v) =>
                     handleSelectChange({
                       target: { name: "fromCurrency", value: v },
@@ -147,11 +131,12 @@ const ExchangeRate = () => {
               </Form.Item>
             </Col>
           </Row>
-          <Row gutter={65}>
+          <Row gutter={10} style={{display: 'flex', justifyContent: 'space-between'}}>
             <Col span={8}>
               <Form.Item>
-                <label style={{ fontSize: "1.5rem" }}> To Amount </label>
+                <label style={{ fontSize: "1.5rem", width: "25rem", color: 'white'  }}> To Amount </label>
                 <Input
+                  style={{ width: "20rem" }}
                   name="to"
                   placeholder="To Amount"
                   value={to}
@@ -161,11 +146,11 @@ const ExchangeRate = () => {
             </Col>
             <Col span={8}>
               <Form.Item>
-                <label style={{ fontSize: "1.5rem" }}> Currency </label>
+                <label style={{ fontSize: "1.5rem", color: 'white'  }}> Currency </label>
                 <Select
                   style={{ width: "10rem" }}
                   size="medium"
-                  placeholder="USD"
+                  placeholder="Currency"
                   onChange={(v) =>
                     handleSelectChange({
                       target: { name: "toCurrency", value: v },
