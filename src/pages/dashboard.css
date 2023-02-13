@@ -1,0 +1,38 @@
+.dash-body {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: dodgerblue linear-gradient(22deg, aqua, dodgerblue, deeppink) fixed;
+	color: white;
+    font: normal 32px/1.6 system-ui, sans-serif;
+	text-shadow: 0 1px 1px hsl(0 0% 0% / 20%);
+}
+
+.routes {
+    display: flex;
+    gap: 2rem;
+}
+
+.route {
+    width: 17rem;
+    height: 9rem;
+    border-radius: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(165, 6, 197) linear-gradient(2deg, rgb(7, 236, 236), rgb(137, 178, 218), rgb(249, 4, 134)) fixed;
+}
+
+.sign-out {
+    width: 13rem;
+    height: 5rem;
+    background: rgb(250, 134, 134) linear-gradient(2deg, rgb(7, 182, 236), rgb(6, 238, 95), rgb(249, 212, 4)) fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3rem;
+    border-radius: 1rem;
+}
