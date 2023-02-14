@@ -31,7 +31,7 @@ const ListCoin = () => {
       
      for (var key in coinPair.data) {
        if (coinPair.data.hasOwnProperty(key)) {
-           data.push({key: Math.floor(Math.random() * 1000), coin: key, rate: coinPair.data[key].rate})
+           data.push({key: Math.floor(Math.random() * 1000), coin: key, rate: (coinPair.data[key].rate).toFixed(4)})
            // console.log(key + " -> " + coinPair.data[key].rate);
        }
    }
@@ -61,13 +61,13 @@ const ListCoin = () => {
           title: 'Rate',
           dataIndex: 'rate',
           key: 'rate',
-          width: 100
+          width: 150
         },
       ];
 
   return (
     <div className='list-body'>
-        <h2>Coin Listings</h2>
+        <h2 style={{color: 'pink'}}>WITHBLOOM COIN LISTINGS</h2>
         <CoinSearch onSearch={handleSearch} className="search" />
         <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
         <Table columns={columns} dataSource={search.length ? [...search] : data} />

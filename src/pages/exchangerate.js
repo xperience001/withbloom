@@ -12,6 +12,7 @@ const ExchangeRate = () => {
   const [to, setTo] = useState();
   const [toCurrency, setToCurrency] = useState();
   const [coinPairData, setCoinPairData] = useState({});
+  const [available, setAvailable] = useState(true)
 
   useEffect(() => {
     fetch('https://staging-biz.coinprofile.co/v3/currency/rate')
@@ -58,17 +59,55 @@ const ExchangeRate = () => {
         // coin = coin.toLowerCase();
         return coin.includes(coinPair);
       });
-    const rate = pair[0].rate
-    setRate(rate)
-    // setRate(rate)
-    let ans;
-    if (from) {
-      ans = from * rate;
-      console.log('rate', rate)
-      setTo(ans);
+      if(pair.length){   
+        setAvailable(true)       
+          const rate = pair[0].rate
+          setRate(rate)
+          // setRate(rate)
+          let ans;
+          if (from) {
+            ans = from * rate;
+            console.log('rate', rate)
+            setTo(ans);
+          } else {
+            ans = to / rate;
+            setFrom(ans);
+          }
     } else {
-      ans = to / rate;
-      setFrom(ans);
+        let fromCoinPair = `${fromCurrency}NGN`
+        let toCoinPair = `${toCurrency}NGN`
+
+        const fromPair = data.filter(({ coin }) => {
+            return coin.includes(fromCoinPair);
+          });
+        const toPair = data.filter(({ coin }) => {
+            return coin.includes(toCoinPair);
+          });
+        const fromRate = fromPair[0].rate
+        const toRate = toPair[0].rate
+        console.log('fromRate:', fromRate)
+        console.log('toRate:', toRate)
+
+
+        const realRate = fromRate / toRate
+        console.log('realRate:', realRate)
+
+
+        let ans;
+        if (from) {
+            ans = from * realRate;
+            console.log('rate', rate)
+            setTo(ans);
+          } else {
+            ans = to / realRate;
+            setFrom(ans);
+          }
+
+
+        setAvailable(false)
+        setTimeout(() => {
+            setAvailable(true)
+        }, 5000);
     }
 }
 
@@ -92,6 +131,8 @@ const ExchangeRate = () => {
 
   return (
     <div className="card-body">
+        <h1 style={{color: 'pink'}}>WITHBLOOM EXCHANGE</h1>
+
       <div className="card">
         <form>
           <Row gutter={10} style={{display: 'flex', justifyContent: 'space-between', color: 'white' }}>
@@ -176,6 +217,7 @@ const ExchangeRate = () => {
             >
               Exchange
             </Button>
+          {!available && <div style={{width: '100%', fontSize: '1.2rem', textAlign: "center", color: 'pink'}}>Pair exchange data not directly available. This result is calculated using NGN as a standard.</div>}
           </span>
         </form>
       </div>

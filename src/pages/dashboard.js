@@ -6,7 +6,7 @@ import "./dashboard.css"
 const Dashboard = () => {
   return (
     <div className='dash-body'>
-        <h1>Dashboard</h1>
+        <h1 style={{color: 'pink'}}>WITHBLOOM</h1>
         <span className='routes'>
         <div className='route'><Link to="/listCoin">List Coin</Link></div>
         <div className='route'><Link to="/exchangeRate">Exchange Rate</Link></div>
