@@ -77,32 +77,13 @@ const ExchangeRate = () => {
         let fromCoinPair = `${fromCurrency}NGN`
         let toCoinPair = `${toCurrency}NGN`
 
-        const fromPair = data.filter(({ coin }) => {
-            return coin.includes(fromCoinPair);
-          });
-        const toPair = data.filter(({ coin }) => {
-            return coin.includes(toCoinPair);
-          });
-        const fromRate = fromPair[0].rate
-        const toRate = toPair[0].rate
-        console.log('fromRate:', fromRate)
-        console.log('toRate:', toRate)
-
-
-        const realRate = fromRate / toRate
-        console.log('realRate:', realRate)
-
-
-        let ans;
-        if (from) {
-            ans = from * realRate;
-            console.log('rate', rate)
-            setTo(ans);
-          } else {
-            ans = to / realRate;
-            setFrom(ans);
-          }
-
+        if(fromCurrency === 'NGN' || toCurrency === 'NGN'){
+          let fromCoinPair = `USD${fromCurrency}`
+          let toCoinPair = `USD${toCurrency}`
+          reExchange(fromCoinPair, toCoinPair)
+        } else {
+          exchange(fromCoinPair, toCoinPair)
+        }
 
         setAvailable(false)
         setTimeout(() => {
@@ -110,6 +91,62 @@ const ExchangeRate = () => {
         }, 5000);
     }
 }
+
+  const exchange = (fromCoinPair, toCoinPair) => {
+    const fromPair = data.filter(({ coin }) => {
+      return coin.includes(fromCoinPair);
+    });
+  const toPair = data.filter(({ coin }) => {
+      return coin.includes(toCoinPair);
+    });
+  const fromRate = fromPair[0].rate
+  const toRate = toPair[0].rate
+  console.log('fromRate:', fromRate)
+  console.log('toRate:', toRate)
+
+
+  const realRate = fromRate / toRate
+  console.log('realRate:', realRate)
+
+
+  let ans;
+  if (from) {
+      ans = from * realRate;
+      console.log('rate', rate)
+      setTo(ans);
+    } else {
+      ans = to / realRate;
+      setFrom(ans);
+    }
+  }
+
+  const reExchange = (fromCoinPair, toCoinPair) => {
+    const fromPair = data.filter(({ coin }) => {
+      return coin.includes(fromCoinPair);
+    });
+  const toPair = data.filter(({ coin }) => {
+      return coin.includes(toCoinPair);
+    });
+  const fromRate = fromPair[0].rate
+  const toRate = toPair[0].rate
+  console.log('fromRate:', fromRate)
+  console.log('toRate:', toRate)
+
+
+  const realRate = toRate / fromRate
+  console.log('realRate:', realRate)
+
+
+  let ans;
+  if (from) {
+      ans = from * realRate;
+      console.log('rate', rate)
+      setTo(ans);
+    } else {
+      ans = to / realRate;
+      setFrom(ans);
+    }
+  }
 
   const handleExchange = async () => {
     handle()
