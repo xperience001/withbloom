@@ -12,7 +12,7 @@ const Dashboard = () => {
         <div className='route'><Link to="/exchangeRate">Exchange Rate</Link></div>
         </span>
         <span className='sign-out'>
-        <Link onClick={() => {app.auth().signOut()}}>Sign Out</Link>
+        <Link onClick={() => {app.auth().signOut()}}>Sign Out!</Link>
         </span>
     </div>
   )
