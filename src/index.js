@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from 'react-router-dom';
 import Bugsnag from '@bugsnag/js'
 import BugsnagPluginReact from '@bugsnag/plugin-react'
+import { BrowserRouter } from 'react-router-dom';
 
 Bugsnag.start({
   apiKey: 'f5c76b3e5e7db101c12c1ef92f3b3887',
@@ -24,11 +24,9 @@ const ErrorBoundary = Bugsnag.getPlugin('react')
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <ErrorBoundary FallbackComponent={ErrorView}>
-    <BrowserRouter>
+  <BrowserRouter>
       <App />
-    </BrowserRouter>
-  </ErrorBoundary>
+  </BrowserRouter>
 );
 
 
